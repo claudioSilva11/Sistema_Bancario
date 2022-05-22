@@ -1,17 +1,22 @@
 public class ContaPoupanca extends Conta{
-    private double cpmf;
+    // private double cpmf;
+    private double taxa;
 
-    public ContaPoupanca(String nome,String sobreNome, int numero, double saldo, double limite,int senha,double sacar, double cpmf) {
-        super(nome,sobreNome,numero, saldo, limite,senha,sacar);
-        this.cpmf=cpmf;
+    public ContaPoupanca(String nome,String sobreNome,String senha,boolean chequeEspecial){
+        super(nome,sobreNome,senha,chequeEspecial);
+        this.taxa=0.0017;
+        
     }
-
-    public double getCpmf(){
-        return cpmf;
+    public void rendimento(){
+        double saldo=getSaldo()+getSaldo()*taxa;
+        this.setSaldo(saldo);
     }
-    public void setCpmf(double cpmf){
-        this.cpmf=cpmf;
-    }
+    // public double getCpmf(){
+    //     return cpmf;
+    // }
+    // public void setCpmf(double cpmf){
+    //     this.cpmf=cpmf;
+    // }
 
     
 }

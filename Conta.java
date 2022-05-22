@@ -1,57 +1,66 @@
+import java.util.Random;
+import java.lang.Math;
 public class Conta {
         private String nome;
         private String sobreNome;
         private int numero;
-        private double saldo=0;
-        private double limite=0;
-        private int senha;
-        private double sacar;
+        private double saldo;
+        private double limite;
+        private String senha;
+        private double chequeEspecial;
        
     
-        public Conta(String nome,String sobreNome, int numero, double saldo, double limite,int senha,double sacar){
+        public Conta(String nome,String sobreNome,String senha,Boolean cheque){
             this.nome=nome;
             this.sobreNome=sobreNome;
-            this.numero=numero;
-            this.saldo=saldo;
-            this.limite=limite;
+            Random gerador = new Random();
+            this.numero=Math.abs(gerador.nextInt());
+            this.saldo=5;
+            this.limite=1200.00;
             this.senha=senha;
-            this.sacar=sacar;
-        }
-        public Conta(double saldo,double limite, double sacar){
-
-            this.saldo=saldo;
-            this.limite=limite;
-            this.sacar=sacar;
+           possueCheque(cheque);
         }
 
-    public void senha(){
-        if(senha != senha){
-            System.out.println("acesso permitido");
-        }else{
-            System.out.println("acesso negado");
-        }
-    }
+    // public void senha(){
+    //     if(senha != senha){
+    //         System.out.println("acesso permitido");
+    //     }else{
+    //         System.out.println("acesso negado");
+    //     }
+    // }
 
-        public void sacar(Double valor){
+        public boolean sacar(Double valor){
             if(valor>0 && this.getSaldo() >= valor){
                 this.saldo-=valor;
                 System.out.println("saque realizado");
+                return true;
             }else{
                 System.out.println("valor indisponivel");
+                return false;
             }
+
         }
 
-        public void depositar(Double valor){
+        public boolean depositar(Double valor){
             if(valor < 0){
                 System.out.println("Valor negativo");
+                return false;
             }else{
                 this.saldo += valor;
                 System.out.println("valor positivo");
+                return true;
             }
         }
-        public void transerir(Double valor, Conta conta1){
-            this.saldo-=valor;
-            conta1.saldo+=valor;
+        public void possueCheque(boolean cheque){
+            if(cheque){
+                this.chequeEspecial=2300.00;
+            }
+            else
+            {
+                this.chequeEspecial=0;
+            }
+
+
         }
 
         @Override
@@ -88,17 +97,17 @@ public class Conta {
         public void setLimite(double limite){
             this.limite=limite;
         }
-        public int getSenha(){
+        public String getSenha(){
             return senha;
         }
-        public void setSenha(int senha){
+        public void setSenha(String senha){
             this.senha=senha;
         }
-        public double getSacar(){
-            return sacar;
+        public double getChequeEspecial(){
+            return chequeEspecial;
         }
-        public void setSacar(double sacar){
-            this.sacar=sacar;
+        public void setChequeEspecial(double chequeEspecial){
+            this.chequeEspecial=chequeEspecial;
         }
 }
     
